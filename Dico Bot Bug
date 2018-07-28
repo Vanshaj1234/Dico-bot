@@ -2,14 +2,16 @@ import discord
 token = ("NDcyNzIzODYyNTcyODkyMTYx.Dj3h_A.pqeowycs4vsonQDyNQymgCmPqmo")
 client = discord.Client()
 
+Cpt_Jack_Sparrow = str.lower("Jack Sparrow")
+
 @client.event
 async def on_message(message):
     # we do not want the bot to reply to itself
     if message.author == client.user:
         return
 
-    if message.content.startswith('!hello'):
-        msg = 'Hello {0.author.mention}'.format(message)
+    if message.content.startswith(Cpt_Jack_Sparrow):
+        msg = 'Its Captain Jack Sparrow {0.author.mention}'.format(message)
         await client.send_message(message.channel, msg)
 
 @client.event
