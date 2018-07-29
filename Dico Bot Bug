@@ -2,16 +2,23 @@ import discord
 token = ("NDcyNzIzODYyNTcyODkyMTYx.Dj3h_A.pqeowycs4vsonQDyNQymgCmPqmo")
 client = discord.Client()
 
-Cpt_Jack_Sparrow = str.lower("Jack Sparrow")
+Cpt_Jack_Sparrow = ("captain jack sparrow")
+Jack_Sparrow = ("jack sparrow")
+
 
 @client.event
 async def on_message(message):
-    # we do not want the bot to reply to itself
+     #we do not want the bot to reply to itself
+
     if message.author == client.user:
         return
 
-    if message.content.startswith(Cpt_Jack_Sparrow):
-        msg = 'Its Captain Jack Sparrow {0.author.mention}'.format(message)
+    if (Cpt_Jack_Sparrow) in str.lower(message.content):
+        msg = 'Where\'s the rum? {0.author.mention}'.format(message)
+        await client.send_message(message.channel, msg)
+
+    elif (Jack_Sparrow) in str.lower(message.content):
+        msg = 'It\'s Captain Jack Sparrow {0.author.mention}'.format(message)
         await client.send_message(message.channel, msg)
 
 @client.event
