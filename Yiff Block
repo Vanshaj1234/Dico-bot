@@ -1,0 +1,39 @@
+            ##======YIFF================================================================================================
+            if syntax[1]=="yiff":
+
+                import yippi
+
+                blacklist = ['-cub','-vore','-scat','-gore'] ##Added to the search by default because these queries suck
+
+                if len(syntax) <= 2:
+                    msg = "I need queries, {0.author.mention}!".format(message)
+                    await client.send_message(message.channel,msg)
+                else:
+                    print("Beginning search")
+                    query = []
+
+                    ##=For loop to organize queries===============================
+                    fornumber = 1
+                    for x in syntax:
+                        if fornumber > 2:
+                            query.insert(0,x)
+                        fornumber = fornumber + 1
+                    ##============================================================
+
+                    query = query + blacklist
+                    print (query)
+                    result = yippi.esix.search.post(query)
+                    if result != None:
+                       url = result[0].file_url
+
+                       msg = str(url).format(message)
+                       await client.send_message(message.channel,msg)
+
+                       #if result.file_ext != None:
+                       #  if result.file_ext == "SWF":
+                       #      msg = "Crap, its a filetype discord can't render, sorry".format(message)
+                       #     await client.send_message(message.channel,msg)
+                    else:
+                        msg = "Sorry, couldn't find what you were looking for, {0.author.mention}".format(message)
+                        await client.send_message(message.channel, msg)
+            ##==========================================================================================================
